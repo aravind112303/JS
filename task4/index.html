@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="matter"></p>
+    <p id="bonus"></p>
+</body>
+<script>
+   const first = document.getElementById("matter");
+   const sec = document.getElementById("bonus");
+
+    function cal() {
+    const empDetails = [];
+empDetails.push({name:"Alice", sal:50000});
+empDetails.push({name:"Charile", sal:60000});
+empDetails.push({name:"Bob", sal:40000});
+console.log(empDetails);
+const salaries = [];
+for(const emp of empDetails) {
+    const {sal} = emp;
+    salaries.push(sal);
+}
+console.log(salaries);
+const bonusSALEmp = empDetails.map(emp => {
+    return {
+        ...emp,
+        bonus : emp.sal*0.1
+    }
+})
+console.log(bonusSALEmp);
+
+const totalBonus = bonusSALEmp.reduce((acc,curr) => acc+curr.bonus,0);
+console.log("total bonus" + totalBonus);
+sec.innerText = `Total Bonus given : ${totalBonus}`;
+
+
+function highSal(bonusSALEmp) {
+    first.innerText = '';
+    for(const emp of bonusSALEmp) {
+        if(emp.sal >= 45000) {
+            console.log(emp);
+            first.innerHTML += `${emp.name} earns ${emp.sal} and got a bonus of ${emp.bonus} <br>`;
+        }
+    }
+}
+highSal(bonusSALEmp);
+}
+cal();
+</script>
+</html>

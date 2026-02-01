@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello</h1>
+</body>
+<script>
+    // let user = {name : "ABC"};
+    // let visitor = Object.create(user);
+    // visitor.visitCount =0;
+
+    // to get cookies
+    function getCookie() {
+        let visitCount = document.cookie.split(";");
+        for(cookie of visitCount) {
+            const [key , value] = document.cookie.split("=");
+            return value;
+        }
+    }
+
+    //saving visit in cookie and checking
+    function checkCookie() {
+        if(!document.cookie) {
+            document.cookie = "visit = 1";
+        } else {
+            let value = getCookie();
+            value = parseInt(value) +1;
+            return value;
+        }
+    }
+
+    // Saving name in LocalStorage..
+    if(localStorage.getItem("name") == null) {
+        var name = prompt("Enter your name:");
+        localStorage.setItem("name",name);
+        checkCookie();
+        console.log(`Hello ${name} this is your 1st visit`);
+    } else {
+        let visitCount = checkCookie();
+        document.cookie = "visit ="+visitCount;
+        console.log(`Hello ${name} this is your ${visitCount} visit`);
+    }
+</script>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="enter here" onkeyup="keyUp(this.value)">
+    <h1></h1>
+</body>
+<script>
+    let h1 = document.querySelector("h1");
+    let hello = ["Hello", "Result1", "Result2"];
+
+    function debounce(fn, delay ) {
+        let timer;
+        return function(...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn.apply(this, args);
+            },delay)
+        }
+    }
+
+    function search(query) {
+        return new Promise((resolve, reject) => {
+            if(query.trim() !== "hello" && query.trim() !== "Hello") {
+                reject("You must enter input");
+            } else {
+                resolve(hello);
+            }
+        })
+       }
+
+    function debouncedSearchINN(query) {
+        search(query)
+        .then(result => {
+            console.log("Debounce triggered successfully");
+            return result;
+        }).then(result => {
+            const formatted = result.map(x => x.toUpperCase());
+            console.log("Results :" + formatted.join(" , "));
+            h1.innerText = formatted.join(" , ")
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+    }
+
+
+    function throttle(fn, delay) {
+        let throttleID = false;
+        return function(...args) {
+            if(!throttleID) {
+                fn.apply(this, args);
+                throttleID = true;
+            } else {
+                setTimeout(()=> {
+                    throttleID = false;
+                },delay)
+            }
+        }
+    }
+
+    function tsearch(input) {
+        console.log("Throttled keystroke:",input);
+    }
+    
+    const throttleSearch = throttle(tsearch,10);
+    const debouncedSearch = debounce(debouncedSearchINN, 1000);
+
+    function keyUp(input) {
+        throttleSearch(input);
+        debouncedSearch(input);
+    }
+
+</script>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Enter any text" onkeyup="KeyUp(this.value)">
+    <h1></h1>  
+</body>
+<script>
+    let hello = ["hello", "Result1", "Result", "Result2"];
+    let h1 = document.querySelector("h1");
+
+    // debounce
+    function debounce(fn , delay) {
+        let timer;
+        return function(...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn.apply(this, args);
+            }, delay);
+        }
+    }
+
+    function search(query) {
+        return new Promise((resolve , reject) => {
+            if(!hello.includes(query.trim())) {
+                reject("Enter valid input");
+            } else {
+                resolve(hello);
+            }
+        })
+    }
+
+    //promise chaining to print output in webpage 
+    function debouncedSearchINN(query) {
+        search(query)
+        .then(result => {
+            console.log("debounce triggered");
+            return result;
+        })
+        .then(result => {
+            let formatted = hello.map(x => x.toUpperCase());
+            console.log(formatted.join(" , "));
+            h1.innerText = formatted.join(" , ");
+        })
+        .catch(error => {
+            console.log("not available");
+        })
+    }
+
+    //throttle 
+    function throttle(fn ,delay) {
+        let throttleID = false;
+        return function(...args) {
+            if(!throttleID) {
+                fn.apply(this, args);
+                throttleID = true;
+            }
+            else {
+                setTimeout(() => {
+                    throttleID = false;
+                })
+            }
+        }
+    }
+
+    function tsearch(input) {
+        console.log("Throttle triggered:" ,input);
+    }
+
+    let debounceSearch = debounce(debouncedSearchINN, 1000);
+    let throttleSearch = throttle(tsearch, 10);
+
+    function KeyUp(input) {
+        throttleSearch(input);
+        debounceSearch(input);
+    }
+
+</script>
+</html> -->

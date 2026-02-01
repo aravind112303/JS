@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World !!</h1>
+</body>
+<script>
+    // let animal = {
+    //     eats : true
+    // };
+    // let rabbit = {
+    //     jumps : true
+    // };
+    // rabbit.__proto__ = animal;
+    // console.log(rabbit.eats);
+    // console.log(rabbit.jumps);
+
+    ///using constructor function
+    // function person(name) {
+    //     this.name = name;
+    // }
+    // person.prototype.sayHello = function() {
+    //     console.log(`Hi ${this.name}`);
+    // }
+    // let aravind = new person("Aravind");
+    // let char = new person("cherry");
+    // aravind.sayHello();
+    // char.sayHello();
+
+    // Using ES6 Class 
+    class Person {
+        constructor(name) {
+            this.name = name;
+        }
+        sayHello() {
+            console.log(`Hi ${this.name}`);
+        }
+    }
+    class Child extends Person {
+        constructor(name , rollNo) {
+            super(name);
+            this.rollNo = rollNo;
+        }
+        sayRoll() {
+            console.log(`Hi ${this.name} and ${this.rollNo}`);
+        }
+    }
+    let c1 = new Child("Aravind" , 24);
+    // let p1 = new Person("Nameonly" , 25);
+    // c1.sayHello();
+    c1.sayRoll();
+    // p1.sayHello();
+
+    //Object.create() 
+    // let animal = {
+    //     eats : true
+    // }
+    // let rabbit = Object.create(animal);
+    // rabbit.jumps = true;
+    // console.log(rabbit.eats);
+
+</script>
+</html>

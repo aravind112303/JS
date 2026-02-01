@@ -1,0 +1,85 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>PROMISES</h1>
+</body>
+<script>
+    function savetoDB(data) {
+        return new Promise((resolve, reject) => {
+            let internetSpeed = Math.floor(Math.random()*10)+1;
+            if(data < internetSpeed) {
+                resolve("Success: data was saved");
+            } else {
+                reject("Failure: data was not stored");
+            }
+        })
+    }
+    savetoDB(5)
+    .then(result => {
+        console.log(result);
+        console.log("Promise 1 resolved");
+        return savetoDB(7);
+    }).then(result => {
+        console.log(result);
+        console.log("Promise 2 resolved");
+    })
+    .catch(error => {
+        console.log(error);
+    })
+</script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id>Apna College</h1>
+</body>
+<script>
+    let apna = document.querySelector("h1");
+
+    function colorChange(color, delay) {
+        return new Promise((resolve, reject)=> {
+            setTimeout(()=> {
+               if(!apna) {
+                reject("Rejected");
+               } else {
+                apna.style.color = color;
+                resolve("Color changed");
+               }
+            },delay)
+        });
+    }
+
+    // colorChange("red",1000) 
+    // .then(() => {
+    //     console.log("Color changed to red");
+    //     return colorChange("blue",1000);
+    // }) .then(() => {
+    //     console.log("color changed to blue");
+    //     return colorChange("orange",1000);
+    // }) .then(() => {
+    //     console.log("color changed to orange");
+    // })
+
+    async function color() {
+        try {
+            await colorChange("red", 1000);
+            await colorChange("blue", 1000);
+            await colorChange("orange", 1000);
+        } catch (error) {
+            console.error("error", error)
+        }
+    }
+
+</script>
+</html>

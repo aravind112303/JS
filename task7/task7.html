@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    <button type="reset">Reset</button>
+</body>
+<script>
+
+    let btn = document.querySelector("button");
+    btn.addEventListener("click", ()=> {
+        localStorage.clear();
+        document.cookie = "visit = 1";
+        location.reload();
+    })
+
+    // to get cookies
+    function getCookie() {
+        let visitCount = document.cookie.split(";");
+        for(cookie of visitCount) {
+            const [key , value] = document.cookie.split("=");
+            return value;
+        }
+    }
+
+    function checkCookie() {
+            if(!document.cookie) {
+            document.cookie = "visit = 1";
+        } else {
+            let value = getCookie();
+            value = parseInt(value) +1;
+            return value;
+        }
+    }
+
+    class user {
+        constructor() {
+            if(localStorage.getItem("name")  == null) {
+                this.name = prompt("Enter your name: ");
+                localStorage.setItem("name",this.name);
+                checkCookie();
+            } else {
+                let visitCount = checkCookie();
+                document.cookie = "visit ="+visitCount;
+            }
+        }
+    }
+
+    
+    class visit extends user {
+        constructor(name, visitCount) {
+        super(name);
+        this.visitCount = visitCount;
+        }
+        displayVisit() {
+            let value = getCookie();
+            let userName = localStorage.getItem("name");
+            console.log(`Hello ${userName} and this is your ${value}st visit`);
+            let h1 = document.querySelector("h1");
+            h1.innerText = `Hello, ${userName} and this is your ${value}st visit`;
+        }
+    }
+
+
+
+    let v1 = new visit();
+    v1.displayVisit();
+
+</script>
+</html>

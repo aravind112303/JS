@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="addUser">Add New User</button>
+    <ul id="list"></ul>
+    <button id="showUser">Show Users</button>
+    <button id="clearUsers">Clear All</button>
+
+<script>
+    const user = document.getElementById("addUser");
+    const list = document.getElementById("list");
+    const show = document.getElementById("showUser");
+    const clearAll = document.getElementById("clearUsers");
+
+    let userArray = [];
+    user.addEventListener("click" , () => {
+        const name = prompt("Enter user name:");
+        userArray.push(name);
+        if(!name) {
+            return;
+        }
+    const li = document.createElement("li");
+    li.innerText = name ;
+    list.appendChild(li);
+        alert("User added Successfully");    
+    });
+
+    show.addEventListener("click" , ()=> {
+        console.log(userArray);
+    })
+
+    clearAll.addEventListener("click", () => {
+        userArray.length = 0;
+        list.innerHTML = "";
+    })
+</script>
+</body>
+</html>

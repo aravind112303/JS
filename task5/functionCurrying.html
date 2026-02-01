@@ -1,0 +1,41 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Function Curring using Bind Method </h1>
+</body>
+<script>
+    function multiply(a,b) {
+        return a*b;
+    }
+    let multiplyByTwo = multiply.bind(this, 2);
+    let multiplyByThree = multiply.bind(this, 3);
+</script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Function Currying using Closure</h1>
+</body>
+<script>
+    function outer(a) {
+        return function inner(y) {
+            console.log(a*y);
+        }
+    }
+    let multiplyByTwo = outer(2);
+    multiplyByTwo(3);
+    let multiplyByThree = outer(3);
+    multiplyByThree(3);
+</script>
+</html>

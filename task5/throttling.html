@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" onkeyup="throttledScroll(this.value)"/>
+</body>
+<script>
+    function throttle(fn, limit) {
+        let inThrottle = false;
+        return function(...args) {
+            if(!inThrottle) {
+                fn.apply(this, args);
+                inThrottle = true;
+
+                setTimeout(() => {
+                    inThrottle = false;
+                }, limit);
+            }
+        };
+    }
+    function logScroll(query) {
+        console.log("Scroll event", query);
+    }
+    const throttledScroll = throttle(logScroll,  1000);
+</script>
+</html>
